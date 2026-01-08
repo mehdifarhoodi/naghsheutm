@@ -3,29 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شرکت نقشه‌برداری | Surveying Co.</title>
+    <title>شرکت نقشه‌برداری آریا | Surveying Co.</title>
     
     <!-- فونت وزیرمتن -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
 
     <style>
+        /* --- متغیرها --- */
         :root {
             --primary-color: #738b71;
             --secondary-color: #607280;
-            --accent-green: #4CAF50; /* رنگ سبز دکمه تماس */
+            --accent-green: #4CAF50;
             --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.15);
             --text-color: #f0f0f0;
             --dark-bg: #1a1a1d;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            outline: none;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+        
         body {
             font-family: 'Vazirmatn', sans-serif;
             background: linear-gradient(135deg, var(--dark-bg), #2c3e50);
@@ -35,17 +31,11 @@
             padding-bottom: 70px;
         }
 
-        /* اشکال پس‌زمینه */
-        .bg-shape {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: -1;
-        }
+        /* --- پس‌زمینه --- */
+        .bg-shape { position: fixed; border-radius: 50%; filter: blur(80px); z-index: -1; }
         .shape-1 { width: 400px; height: 400px; background: var(--primary-color); top: -100px; right: -100px; opacity: 0.3; }
         .shape-2 { width: 300px; height: 300px; background: var(--secondary-color); bottom: 100px; left: -50px; opacity: 0.3; }
 
-        /* افکت شیشه‌ای */
         .glass {
             background: var(--glass-bg);
             backdrop-filter: blur(16px);
@@ -54,312 +44,304 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
-        /* ----- هدر ----- */
-        header {
-            position: fixed;
-            top: 20px; left: 5%; right: 5%;
-            padding: 1rem 2rem;
-            display: flex; align-items: center; justify-content: space-between;
-            z-index: 1000; border-radius: 16px;
-            flex-direction: row-reverse;
-        }
-
+        /* --- هدر --- */
+        header { position: fixed; top: 20px; left: 5%; right: 5%; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; z-index: 1000; border-radius: 16px; flex-direction: row-reverse; }
         .logo { font-size: 1.4rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
-
         nav.desktop-nav ul { display: flex; list-style: none; gap: 25px; margin: 0; padding: 0; }
         nav.desktop-nav a { text-decoration: none; color: #ccc; font-weight: 500; transition: 0.3s; }
         nav.desktop-nav a:hover { color: var(--primary-color); }
         .mobile-menu-btn { display: none; font-size: 1.8rem; cursor: pointer; }
 
-        /* ----- منوی موبایل ----- */
-        .mobile-nav-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 2000;
-            opacity: 0; visibility: hidden; transition: 0.3s; backdrop-filter: blur(3px);
-        }
-        .mobile-nav-container {
-            position: fixed; top: 0; right: 0; width: 280px; height: 100%;
-            background: rgba(30, 30, 35, 0.95); z-index: 2001;
-            transform: translateX(100%); transition: transform 0.3s ease-in-out;
-            padding: 2rem; display: flex; flex-direction: column;
-            border-left: 1px solid var(--glass-border);
-        }
+        /* --- منوی موبایل --- */
+        .mobile-nav-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; opacity: 0; visibility: hidden; transition: 0.3s; backdrop-filter: blur(3px); }
+        .mobile-nav-container { position: fixed; top: 0; right: 0; width: 280px; height: 100%; background: rgba(30, 30, 35, 0.95); z-index: 2001; transform: translateX(100%); transition: transform 0.3s ease-in-out; padding: 2rem; display: flex; flex-direction: column; border-left: 1px solid var(--glass-border); }
         .mobile-nav-open .mobile-nav-overlay { opacity: 1; visibility: visible; }
         .mobile-nav-open .mobile-nav-container { transform: translateX(0); }
-        .close-btn {
-            align-self: flex-end; background: #ff4444; color: white; border: none;
-            width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem;
-            cursor: pointer; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center;
-        }
+        .close-btn { align-self: flex-end; background: #ff4444; color: white; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; }
         .mobile-nav-links { list-style: none; text-align: right; }
         .mobile-nav-links li { margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem; }
         .mobile-nav-links a { text-decoration: none; color: #fff; font-size: 1.1rem; display: block; }
 
-        /* ----- Hero ----- */
-        .hero {
-            min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-            align-items: center; text-align: center; padding: 100px 20px 50px;
-        }
+        /* --- Hero --- */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 100px 20px 50px; }
         .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
         .hero p { font-size: 1.1rem; max-width: 600px; margin-bottom: 2rem; opacity: 0.9; }
-        .btn {
-            padding: 12px 35px; background: var(--primary-color); color: white;
-            border-radius: 50px; text-decoration: none; transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(115, 139, 113, 0.4);
-        }
+        .btn { padding: 12px 35px; background: var(--primary-color); color: white; border-radius: 50px; text-decoration: none; transition: 0.3s; box-shadow: 0 4px 15px rgba(115, 139, 113, 0.4); }
         .btn:hover { background: #8aa388; transform: translateY(-2px); }
 
-        /* ----- Sections ----- */
         section { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
         h2 { text-align: center; margin-bottom: 3rem; font-size: 2rem; color: var(--primary-color); }
+
+        /* --- NEW: Holographic Tech Section --- */
+        .tech-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 50px;
+            padding: 100px 5%;
+            margin-bottom: 50px;
+        }
+
+        .tech-text h2 { text-align: right; margin-bottom: 20px; text-shadow: 0 0 20px rgba(115, 139, 113, 0.4); }
+        .tech-text p { color: #ccc; font-size: 1.1rem; margin-bottom: 30px; text-align: justify; }
+        .tech-list { list-style: none; margin-bottom: 30px; padding: 0; }
+        .tech-list li { margin-bottom: 15px; font-size: 1.05rem; color: #ddd; display: flex; align-items: center; gap: 10px; }
+
+        /* استایل کارت هولوگرافیک */
+        .card-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 4/3;
+            margin: 0 auto;
+            border-radius: 1.5em;
+            padding: 2px;
+            --electric-light-color: #a3c4a0;
+            --electric-border-color: #738b71;
+        }
+
+        .inner-container { position: relative; width: 100%; height: 100%; z-index: 1; }
+
+        .border-outer {
+            position: absolute; inset: 0;
+            border: 2px solid rgba(115, 139, 113, 0.5);
+            border-radius: 1.5em;
+            pointer-events: none;
+        }
+
+        .main-card-effect {
+            position: absolute; inset: -4px;
+            border: 2px solid var(--electric-border-color);
+            border-radius: 1.5em;
+            filter: url(#turbulence-noise); /* اتصال به SVG */
+            opacity: 0.7;
+            z-index: 0;
+        }
+
+        .glow-layer-1 {
+            position: absolute; inset: 0;
+            border: 2px solid rgba(115, 139, 113, 0.6);
+            border-radius: 24px; filter: blur(2px);
+        }
+
+        .glow-layer-2 {
+            position: absolute; inset: 0;
+            border: 2px solid var(--electric-light-color);
+            border-radius: 24px; filter: blur(6px); opacity: 0.6;
+        }
+
+        .background-glow {
+            position: absolute; inset: 0;
+            border-radius: 24px; filter: blur(40px);
+            background: radial-gradient(circle at center, rgba(115, 139, 113, 0.4), transparent 70%);
+            opacity: 0.4; z-index: -1;
+        }
+
+        .content-container {
+            position: absolute; inset: 6px;
+            border-radius: 20px; overflow: hidden; z-index: 2; background: #000;
+        }
+
+        .showcase-video {
+            width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.3s;
+        }
+        .card-container:hover .showcase-video { opacity: 1; }
+
+        .video-overlay-text {
+            position: absolute; bottom: 20px; right: 20px; z-index: 3; text-align: right;
+        }
+        .badge-glass {
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+            padding: 5px 12px; border-radius: 50px; font-size: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.2); color: var(--accent-green); font-weight: bold;
+        }
+        .video-title {
+            color: white; font-size: 1.2rem; margin-top: 10px; font-weight: bold; text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        /* --- Timeline (Wizard) --- */
+        .process-container { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; position: relative; gap: 20px; }
+        .process-container::before { content: ''; position: absolute; top: 40px; left: 50px; right: 50px; height: 2px; background: rgba(255,255,255,0.15); z-index: 0; }
+        .process-step { flex: 1; min-width: 150px; text-align: center; position: relative; z-index: 1; }
+        .step-icon-box { width: 80px; height: 80px; background: rgba(30, 30, 35, 0.95); border: 2px solid var(--primary-color); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 0 20px rgba(115, 139, 113, 0.3); transition: transform 0.3s; }
+        .process-step:hover .step-icon-box { transform: scale(1.1); background: var(--primary-color); color: white; }
+        .step-title { color: #fff; font-size: 1.1rem; margin-bottom: 10px; font-weight: bold; }
+        .step-desc { color: #ccc; font-size: 0.9rem; line-height: 1.5; padding: 0 10px; }
+
+        /* --- FAQ Accordion (Single Column) --- */
+        .faq-grid { display: flex; flex-direction: column; gap: 15px; max-width: 800px; margin: 0 auto; }
+        .faq-item { border-radius: 12px; overflow: hidden; transition: all 0.3s ease; }
+        .faq-item.active { background: rgba(255, 255, 255, 0.15); box-shadow: 0 10px 30px rgba(0,0,0,0.2); border-color: var(--primary-color); }
+        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; user-select: none; background: rgba(255,255,255,0.05); }
+        .faq-question:hover { background: rgba(255,255,255,0.1); }
+        .faq-icon { font-size: 1.5rem; color: var(--primary-color); transition: transform 0.3s; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); color: #ff4444; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0, 1, 0, 1); padding: 0 20px; color: #ccc; font-size: 0.95rem; line-height: 1.8; opacity: 0; }
+        .faq-item.active .faq-answer { opacity: 1; padding-bottom: 20px; padding-top: 10px; }
+
+        /* --- General Layout --- */
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
         .card { padding: 2rem; text-align: center; transition: 0.3s; border-radius: 16px; }
         .card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.15); }
         .icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
 
-        /* ----- جدول قیمت (Pricing Table) ----- */
-        .pricing-table-container {
-            overflow-x: auto; /* اسکرول افقی در موبایل */
-            border-radius: 16px;
-        }
-        
-        table.glass-table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 600px; /* حداقل عرض برای خوانایی در موبایل */
-            border-radius: 16px;
-            overflow: hidden;
-        }
+        .pricing-table-container { overflow-x: auto; border-radius: 16px; }
+        table.glass-table { width: 100%; border-collapse: collapse; min-width: 600px; border-radius: 16px; overflow: hidden; }
+        table.glass-table th, table.glass-table td { padding: 1rem; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        table.glass-table th { background-color: rgba(115, 139, 113, 0.4); color: #fff; font-weight: bold; }
+        table.glass-table tbody tr:nth-child(odd) { background-color: rgba(255, 255, 255, 0.05); }
+        table.glass-table tbody tr:hover { background-color: rgba(255, 255, 255, 0.15); }
 
-        table.glass-table th, table.glass-table td {
-            padding: 1rem;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        /* --- Clients & BackToTop --- */
+        .client-logo-item { font-size: 1.2rem; opacity: 0.6; font-weight: bold; color: white; padding: 10px 20px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50px; white-space: nowrap; }
+        #backToTop { position: fixed; bottom: 80px; left: 20px; width: 45px; height: 45px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 1900; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        #backToTop.show { opacity: 1; visibility: visible; }
+        #backToTop:hover { background: var(--primary-color); transform: translateY(-3px); }
 
-        table.glass-table th {
-            background-color: rgba(115, 139, 113, 0.4); /* رنگ هدر جدول */
-            color: #fff;
-            font-weight: bold;
-        }
-
-        /* استایل راه راه (Zebra Striping) شیشه‌ای */
-        table.glass-table tbody tr:nth-child(odd) {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-        table.glass-table tbody tr:nth-child(even) {
-            background-color: rgba(255, 255, 255, 0.01);
-        }
-        
-        table.glass-table tbody tr:hover {
-            background-color: rgba(255, 255, 255, 0.15);
-        }
-
-        /* ----- Carousel ----- */
-        .carousel-container { 
-            position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; padding: 2rem 0; 
-            border-radius: 20px; /* حاشیه گرد برای کل باکس */
-        }
+        .carousel-container { position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; padding: 2rem 0; border-radius: 20px; }
         .testimonial-slide { display: none; text-align: center; animation: fadeEffect 0.6s; }
         .testimonial-slide.active { display: block; }
-        @keyframes fadeEffect { from {opacity: 0; transform: translateY(10px);} to {opacity: 1; transform: translateY(0);} }
-        .client-avatar {
-            width: 70px; height: 70px; border-radius: 50%; background: var(--secondary-color);
-            margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
-        }
+        .client-avatar { width: 70px; height: 70px; border-radius: 50%; background: var(--secondary-color); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
         .slider-nav { text-align: center; margin-top: 1rem; }
-        .dot {
-            height: 12px; width: 12px; margin: 0 5px; background-color: rgba(255,255,255,0.3);
-            border-radius: 50%; display: inline-block; cursor: pointer; transition: 0.3s;
-        }
-        .dot.active, .dot:hover { background-color: var(--primary-color); transform: scale(1.2); }
+        .dot { height: 12px; width: 12px; margin: 0 5px; background-color: rgba(255,255,255,0.3); border-radius: 50%; display: inline-block; cursor: pointer; transition: 0.3s; }
+        .dot.active { background-color: var(--primary-color); transform: scale(1.2); }
 
-        /* ----- Footer ----- */
-        footer {
-            margin-top: 50px; padding: 3rem 5% 6rem;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; font-size: 0.9rem;
-        }
-        .footer-col h4 {
-            color: var(--primary-color); margin-bottom: 1.2rem; font-size: 1.1rem;
-            border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; display: inline-block;
-        }
-        .footer-col ul { list-style: none; }
-        .footer-col li { margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px; }
-        .footer-col a { color: #ccc; text-decoration: none; transition: 0.2s; }
-        .footer-col a:hover { color: #fff; padding-right: 5px; }
-
-        /* ----- Sticky Bottom Bar (Green) ----- */
-        .sticky-bottom-bar {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: var(--accent-green); /* رنگ سبز */
-            color: white; padding: 15px; text-align: center; z-index: 2000;
-            cursor: pointer; font-weight: bold; font-size: 1.1rem;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.3);
-            transition: background 0.3s;
-        }
+        footer { margin-top: 50px; padding: 3rem 5% 6rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; font-size: 0.9rem; }
+        .footer-col h4 { color: var(--primary-color); margin-bottom: 1.2rem; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
+        .footer-col ul { list-style: none; } .footer-col li { margin-bottom: 0.8rem; } .footer-col a { color: #ccc; text-decoration: none; }
+        .sticky-bottom-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--accent-green); color: white; padding: 15px; text-align: center; z-index: 2000; cursor: pointer; font-weight: bold; transition: background 0.3s; }
         .sticky-bottom-bar:hover { background: #388E3C; }
 
-        /* ----- Mobile ----- */
+        @media (max-width: 900px) {
+            .tech-showcase { grid-template-columns: 1fr; text-align: center; }
+            .tech-text h2 { text-align: center; }
+            .tech-text { order: 1; }
+            .card-container { order: 0; width: 100%; aspect-ratio: 16/9; }
+            .video-overlay-text { right: 50%; transform: translateX(50%); width: 100%; text-align: center; }
+        }
+
         @media (max-width: 768px) {
-            header {
-                flex-direction: row; top: 0; left: 0; right: 0; border-radius: 0; border: none; border-bottom: 1px solid var(--glass-border);
-                background: rgba(26, 26, 29, 0.95);
-            }
-            .logo { order: 1; } 
-            .mobile-menu-btn { order: 2; display: block; margin-right: auto; }
-            nav.desktop-nav { display: none; }
-            .hero h1 { font-size: 2rem; }
+            header { flex-direction: row; top: 0; left: 0; right: 0; border-radius: 0; border: none; border-bottom: 1px solid var(--glass-border); background: rgba(26, 26, 29, 0.95); }
+            .logo { order: 1; } .mobile-menu-btn { order: 2; display: block; margin-right: auto; } nav.desktop-nav { display: none; } .hero h1 { font-size: 2rem; }
+            .process-container { flex-direction: column; align-items: center; }
+            .process-container::before { width: 2px; height: 100%; left: 50%; top: 0; transform: translateX(-50%); }
+            .process-step { width: 100%; padding: 20px 0; }
         }
     </style>
 </head>
 <body>
 
+    <!-- SVG Filter Definition (Hidden) -->
+    <svg class="svg-filters" style="position: absolute; width: 0; height: 0; pointer-events: none;">
+        <defs>
+            <filter id="turbulence-noise" colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" result="noise1" seed="1" />
+                <feDisplacementMap in="SourceGraphic" in2="noise1" scale="10" xChannelSelector="R" yChannelSelector="B" />
+            </filter>
+        </defs>
+    </svg>
+
     <div class="bg-shape shape-1"></div>
     <div class="bg-shape shape-2"></div>
 
-    <!-- Header -->
     <header class="glass">
-        <div class="logo">
-            <span>📐</span>
-            <span>آریا نقشه‌بردار</span>
-        </div>
+        <div class="logo"><span>📐</span><span>آریا نقشه‌بردار</span></div>
         <nav class="desktop-nav">
             <ul>
                 <li><a href="#services">خدمات</a></li>
-                <li><a href="#pricing">تعرفه‌ها</a></li> <!-- لینک جدید -->
-                <li><a href="#features">ویژگی‌ها</a></li>
-                <li><a href="#portfolio">نمونه کارها</a></li>
-                <li><a href="#testimonials">نظرات</a></li>
+                <li><a href="#process">روند کار</a></li>
+                <li><a href="#pricing">تعرفه‌ها</a></li>
+                <li><a href="#tech">تکنولوژی</a></li> <!-- لینک جدید -->
+                <li><a href="#faq">سوالات</a></li>
                 <li><a href="#contact">تماس</a></li>
             </ul>
         </nav>
         <div class="mobile-menu-btn" onclick="openMenu()">☰</div>
     </header>
 
-    <!-- Mobile Menu -->
-    <div id="mobileNav" class="">
-        <div class="mobile-nav-overlay" onclick="closeMenu()"></div>
-        <div class="mobile-nav-container glass">
-            <button class="close-btn" onclick="closeMenu()">✕</button>
-            <ul class="mobile-nav-links">
-                <li><a href="#services" onclick="closeMenu()">خدمات</a></li>
-                <li><a href="#pricing" onclick="closeMenu()">تعرفه خدمات</a></li>
-                <li><a href="#features" onclick="closeMenu()">ویژگی‌ها</a></li>
-                <li><a href="#portfolio" onclick="closeMenu()">نمونه کارها</a></li>
-                <li><a href="#testimonials" onclick="closeMenu()">نظرات</a></li>
-                <li><a href="#contact" onclick="closeMenu()">تماس</a></li>
-            </ul>
-        </div>
-    </div>
+    <div id="mobileNav" class=""><div class="mobile-nav-overlay" onclick="closeMenu()"></div><div class="mobile-nav-container glass"><button class="close-btn" onclick="closeMenu()">✕</button><ul class="mobile-nav-links"><li><a href="#services" onclick="closeMenu()">خدمات</a></li><li><a href="#process" onclick="closeMenu()">روند کار</a></li><li><a href="#contact" onclick="closeMenu()">تماس</a></li></ul></div></div>
 
-    <!-- Hero -->
     <div class="hero">
         <h1>دقت در هر نقطه، اطمینان در پروژه</h1>
         <p>ارائه دهنده خدمات نقشه‌برداری دقیق زمینی و هوایی با متدولوژی روز دنیا.</p>
-        <a href="#pricing" class="btn">مشاهده تعرفه‌ها</a>
+        <a href="#process" class="btn">شروع همکاری</a>
     </div>
+
+    <!-- Tech Showcase Section (New) -->
+    <section id="tech" class="tech-showcase">
+        <!-- Text -->
+        <div class="tech-text">
+            <h2>تکنولوژی آینده در دستان شما</h2>
+            <p>ما با بهره‌گیری از جدیدترین متدهای پردازش تصویر و هوش مصنوعی، مرزهای نقشه‌برداری سنتی را جابجا کرده‌ایم.</p>
+            <ul class="tech-list">
+                <li>✅ پردازش ابری نقاط (Cloud Processing)</li>
+                <li>✅ مدل‌سازی سه بعدی بلادرنگ</li>
+                <li>✅ تحلیل هوشمند عوارض زمین</li>
+            </ul>
+            <a href="#contact" class="btn" style="margin-top: 20px; display: inline-block;">مشاوره تخصصی</a>
+        </div>
+
+        <!-- Holographic Video Card -->
+        <div class="card-container">
+            <div class="inner-container">
+                <div class="border-outer">
+                    <div class="main-card-effect"></div>
+                </div>
+                <div class="glow-layer-1"></div>
+                <div class="glow-layer-2"></div>
+            </div>
+            
+            <div class="background-glow"></div>
+
+            <div class="content-container">
+                <div class="video-frame">
+                    <!-- Video Placeholder -->
+                    <video autoplay loop muted playsinline class="showcase-video">
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-top-aerial-shot-of-seashore-with-rocks-1090-large.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-overlay-text">
+                        <span class="badge-glass">AI Powered</span>
+                        <p class="video-title">تحلیل خودکار عوارض</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process">
+        <h2>روند انجام پروژه</h2>
+        <div class="process-container">
+            <div class="process-step"><div class="step-icon-box">📞</div><h3 class="step-title">۱. مشاوره رایگان</h3><p class="step-desc">تماس با کارشناسان جهت نیازسنجی.</p></div>
+            <div class="process-step"><div class="step-icon-box">🔍</div><h3 class="step-title">۲. بازدید میدانی</h3><p class="step-desc">بررسی عوارض و شرایط زمین.</p></div>
+            <div class="process-step"><div class="step-icon-box">🛰️</div><h3 class="step-title">۳. عملیات نقشه‌برداری</h3><p class="step-desc">استقرار تجهیزات دقیق (GPS).</p></div>
+            <div class="process-step"><div class="step-icon-box">💻</div><h3 class="step-title">۴. پردازش داده‌ها</h3><p class="step-desc">ترسیم نقشه‌ها در Civil3D.</p></div>
+            <div class="process-step"><div class="step-icon-box">✅</div><h3 class="step-title">۵. تحویل نهایی</h3><p class="step-desc">ارائه نقشه‌های ممهور.</p></div>
+        </div>
+    </section>
 
     <!-- Services -->
     <section id="services">
         <h2>خدمات تخصصی</h2>
         <div class="grid-container">
-            <div class="card glass">
-                <span class="icon">🛸</span>
-                <h3>فتوگرامتری پهپادی</h3>
-                <p>تولید ابر نقاط و مدل‌های سه بعدی با دقت سانتیمتر.</p>
-            </div>
-            <div class="card glass">
-                <span class="icon">🏗️</span>
-                <h3>پیاده‌سازی سازه</h3>
-                <p>کنترل شاقولی ستون‌ها و اکس‌بندی فونداسیون.</p>
-            </div>
-            <div class="card glass">
-                <span class="icon">🗺️</span>
-                <h3>کاداستر شهری</h3>
-                <p>تهیه نقشه‌های ثبتی و تفکیک اراضی با استاندارد اداره ثبت.</p>
-            </div>
+            <div class="card glass"><span class="icon">🛸</span><h3>فتوگرامتری</h3><p>تولید ابر نقاط و مدل سه بعدی.</p></div>
+            <div class="card glass"><span class="icon">🏗️</span><h3>پیاده‌سازی</h3><p>کنترل شاقولی ستون‌ها.</p></div>
+            <div class="card glass"><span class="icon">🗺️</span><h3>کاداستر</h3><p>تهیه نقشه‌های ثبتی.</p></div>
         </div>
     </section>
 
-    <!-- Pricing Table (New Section) -->
+    <!-- Pricing -->
     <section id="pricing">
-        <h2>تعرفه خدمات نقشه‌برداری</h2>
+        <h2>تعرفه خدمات</h2>
         <div class="pricing-table-container glass">
             <table class="glass-table">
-                <thead>
-                    <tr>
-                        <th>شرح خدمات</th>
-                        <th>واحد</th>
-                        <th>هزینه تقریبی (تومان)</th>
-                        <th>مدت زمان</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>خدمات</th><th>واحد</th><th>هزینه (تومان)</th><th>مدت</th></tr></thead>
                 <tbody>
-                    <tr>
-                        <td>نقشه‌برداری مسطحاتی (1/500)</td>
-                        <td>هکتار</td>
-                        <td>2,500,000</td>
-                        <td>۲ روز</td>
-                    </tr>
-                    <tr>
-                        <td>تهیه نقشه یو‌تی‌ام (UTM)</td>
-                        <td>قطعه</td>
-                        <td>1,800,000</td>
-                        <td>۱ روز</td>
-                    </tr>
-                    <tr>
-                        <td>پیاده‌سازی آکس ستون</td>
-                        <td>نقطه</td>
-                        <td>150,000</td>
-                        <td>روزانه</td>
-                    </tr>
-                    <tr>
-                        <td>مانیتورینگ گودبرداری</td>
-                        <td>ماهانه</td>
-                        <td>توافقی</td>
-                        <td>پروژه‌ای</td>
-                    </tr>
-                    <tr>
-                        <td>نقشه‌برداری هوایی (پهپاد)</td>
-                        <td>هکتار</td>
-                        <td>3,000,000</td>
-                        <td>۳ روز</td>
-                    </tr>
+                    <tr><td>نقشه‌برداری مسطحاتی</td><td>هکتار</td><td>2,500,000</td><td>۲ روز</td></tr>
+                    <tr><td>تهیه نقشه UTM</td><td>قطعه</td><td>1,800,000</td><td>۱ روز</td></tr>
+                    <tr><td>نقشه‌برداری هوایی</td><td>هکتار</td><td>3,000,000</td><td>۳ روز</td></tr>
                 </tbody>
             </table>
-        </div>
-        <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">* قیمت‌ها تقریبی بوده و بسته به شرایط زمین و متراژ قابل تغییر است.</p>
-    </section>
-
-    <!-- Features -->
-    <section id="features">
-        <h2>ویژگی‌های ما</h2>
-        <div class="grid-container">
-            <div class="card glass">
-                <h3>دقت بالا</h3>
-                <p>تضمین دقت میلی‌متری در تمامی پروژه‌های حساس.</p>
-            </div>
-            <div class="card glass">
-                <h3>تجهیزات مدرن</h3>
-                <p>استفاده از گیرنده‌های مالتی‌فرکانس و توتال‌استیشن‌های رباتیک.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio -->
-    <section id="portfolio">
-        <h2>نمونه کارها</h2>
-        <div class="grid-container">
-            <div class="card glass" style="background: rgba(0,0,0,0.2);">
-                <div style="height:150px; background:#4a5a66; border-radius:8px; margin-bottom:1rem; display:flex; align-items:center; justify-content:center;">تصویر پروژه ۱</div>
-                <h3>پروژه اتوبان غدیر</h3>
-                <p>۳۰ کیلومتر نقشه‌برداری مسیر</p>
-            </div>
-            <div class="card glass" style="background: rgba(0,0,0,0.2);">
-                <div style="height:150px; background:#4a5a66; border-radius:8px; margin-bottom:1rem; display:flex; align-items:center; justify-content:center;">تصویر پروژه ۲</div>
-                <h3>برج‌های دوقلو</h3>
-                <p>پایش گودبرداری عمیق</p>
-            </div>
         </div>
     </section>
 
@@ -370,20 +352,17 @@
             <div class="testimonial-slide active">
                 <div class="client-avatar">👨🏻‍💼</div>
                 <span class="quote">"دقت و سرعت عمل تیم آریا در پروژه سدسازی ما واقعاً تحسین‌برانگیز بود."</span>
-                <h4>مهندس احمدی</h4>
-                <small>مدیر پروژه شرکت سازه گستر</small>
+                <h4>مهندس احمدی</h4><small>مدیر پروژه شرکت سازه گستر</small>
             </div>
             <div class="testimonial-slide">
                 <div class="client-avatar">👷🏻‍♂️</div>
                 <span class="quote">"برای تفکیک زمین‌های کشاورزی عالی عمل کردند."</span>
-                <h4>آقای حسینی</h4>
-                <small>کشت و صنعت دشت سبز</small>
+                <h4>آقای حسینی</h4><small>کشت و صنعت دشت سبز</small>
             </div>
             <div class="testimonial-slide">
                 <div class="client-avatar">👩🏻‍💻</div>
                 <span class="quote">"هزینه‌های نقشه‌برداری ما با مشاوره ایشان ۳۰ درصد کاهش یافت."</span>
-                <h4>خانم راد</h4>
-                <small>معمار ارشد</small>
+                <h4>خانم راد</h4><small>معمار ارشد</small>
             </div>
             <div class="slider-nav">
                 <span class="dot active" onclick="currentSlide(1)"></span>
@@ -393,54 +372,59 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
+    <section id="faq">
+        <h2>سوالات متداول</h2>
+        <div class="faq-grid">
+            <div class="faq-item glass">
+                <div class="faq-question"><span>آیا نقشه‌ها دارای مهر نظام مهندسی هستند؟</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>بله، تمامی نقشه‌ها توسط کارشناسان رسمی دادگستری و نظام مهندسی مهر و امضا می‌شوند.</p></div>
+            </div>
+            <div class="faq-item glass">
+                <div class="faq-question"><span>زمان تحویل پروژه‌ها چقدر است؟</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>برای پروژه‌های شهری معمولاً بین ۲۴ تا ۴۸ ساعت و پروژه‌های بزرگتر طبق توافق.</p></div>
+            </div>
+            <div class="faq-item glass">
+                <div class="faq-question"><span>آیا در شهرستان‌ها فعالیت دارید؟</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>بله، تیم‌های عملیاتی ما آماده اعزام به سراسر کشور هستند.</p></div>
+            </div>
+            <div class="faq-item glass">
+                <div class="faq-question"><span>دقت تجهیزات چقدر است؟</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>استفاده از توتال‌استیشن‌های لایکا ۲ ثانیه و GPS مولتی‌فرکانس میلی‌متری.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients (Logos) -->
+    <section id="clients" style="text-align: center; margin-bottom: 60px;">
+        <h3 style="color: #ccc; margin-bottom: 30px; font-size: 1.2rem;">افتخار همکاری با</h3>
+        <div class="glass" style="padding: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; align-items: center; border-radius: 16px;">
+            <div class="client-logo-item">شرکت ملی نفت</div>
+            <div class="client-logo-item">شهرداری تهران</div>
+            <div class="client-logo-item">قرارگاه خاتم</div>
+            <div class="client-logo-item">وزارت راه</div>
+            <div class="client-logo-item">گروه مپنا</div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="glass" id="contact">
-        <div class="footer-col">
-            <h4>آدرس و تماس</h4>
-            <ul>
-                <li>📍 تهران، میدان ونک، برج نگار، طبقه ۵</li>
-                <li>📞 ۰۲۱-۸۸۸۸۰۰۰۰</li>
-                <li>📱 ۰۹۱۲۳۴۵۶۷۸۹</li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h4>خدمات اصلی</h4>
-            <ul>
-                <li><a href="#">نقشه‌برداری زمینی</a></li>
-                <li><a href="#">سیستم اطلاعات مکانی (GIS)</a></li>
-                <li><a href="#">هیدروگرافی</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h4>مناطق تحت پوشش</h4>
-            <ul>
-                <li>تهران و حومه</li>
-                <li>شهرک‌های صنعتی</li>
-                <li>سراسر کشور</li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h4>مجوزها</h4>
-            <ul>
-                <li>✅ عضو نظام مهندسی</li>
-                <li>✅ پروانه نقشه‌برداری</li>
-            </ul>
-        </div>
+        <div class="footer-col"><h4>تماس</h4><ul><li>📍 تهران، میدان ونک</li><li>📞 ۰۲۱-۸۸۸۸۰۰۰۰</li></ul></div>
+        <div class="footer-col"><h4>خدمات</h4><ul><li>نقشه‌برداری زمینی</li><li>GIS</li></ul></div>
+        <div class="footer-col"><h4>مناطق</h4><ul><li>تهران</li><li>سراسر کشور</li></ul></div>
+        <div class="footer-col"><h4>مجوزها</h4><ul><li>✅ نظام مهندسی</li></ul></div>
     </footer>
 
-    <!-- Green Sticky Bottom Bar -->
-    <div class="sticky-bottom-bar" onclick="window.location.href='#contact'">
-        📞 تماس با ما (مشاوره رایگان)
-    </div>
+    <!-- Bottom Bar & Back to Top -->
+    <div class="sticky-bottom-bar" onclick="window.location.href='#contact'">📞 تماس با ما</div>
+    <button id="backToTop" onclick="scrollToTop()">↑</button>
 
-    <!-- Scripts -->
     <script>
-        // Mobile Menu
         const mobileNav = document.getElementById('mobileNav');
         function openMenu() { mobileNav.classList.add('mobile-nav-open'); }
         function closeMenu() { mobileNav.classList.remove('mobile-nav-open'); }
 
-        // Slider
+        // Slider Logic
         let slideIndex = 1;
         showSlides(slideIndex);
         setInterval(() => { slideIndex++; showSlides(slideIndex); }, 5000);
@@ -451,16 +435,43 @@
             let dots = document.getElementsByClassName("dot");
             if (n > slides.length) {slideIndex = 1}
             if (n < 1) {slideIndex = slides.length}
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-                slides[i].classList.remove('active');
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].classList.remove("active");
-            }
+            for (i = 0; i < slides.length; i++) slides[i].style.display = "none";
+            for (i = 0; i < dots.length; i++) dots[i].classList.remove("active");
             slides[slideIndex-1].style.display = "block";
-            setTimeout(() => slides[slideIndex-1].classList.add('active'), 10); 
             dots[slideIndex-1].classList.add("active");
+        }
+
+        // FAQ Logic (Auto-Close)
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const parent = question.parentElement;
+                const answer = parent.querySelector('.faq-answer');
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== parent) {
+                        item.classList.remove('active');
+                        item.querySelector('.faq-answer').style.maxHeight = null;
+                    }
+                });
+                parent.classList.toggle('active');
+                if (parent.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                } else {
+                    answer.style.maxHeight = null;
+                }
+            });
+        });
+
+        // Back to Top Logic
+        const backToTopBtn = document.getElementById("backToTop");
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.classList.add("show");
+            } else {
+                backToTopBtn.classList.remove("show");
+            }
+        };
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 </body>
